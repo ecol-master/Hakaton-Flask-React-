@@ -1,0 +1,43 @@
+.modal-menu {
+    position: fixed;
+    height: 90vh;
+    width: 95vw;
+    top: 0;
+    right: 0;
+
+    display: flex;
+    justify-content: flex-end;
+    transform: scale(0);
+    z-index: 100;
+}
+
+.modal-menu.active {
+    transform: scale(1);
+}
+
+.menu__content {
+    height: 30vh;
+    width: 200px;
+    margin-top: 100px;
+    margin-right: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #D946EF;
+}
+
+.menu__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 100%;
+
+    font-size: 2rem;
+   font-weight: 500;
+   color: aliceblue;
+}
+
+.menu__item {
+    list-style-type: none;
+}
