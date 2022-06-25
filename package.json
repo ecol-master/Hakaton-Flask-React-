@@ -1,0 +1,30 @@
+{
+  "name": "realproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development --entry ./src/index.js -o ./static/scripts",
+    "build": "webpack --mode production --entry ./src/index.js -o ./static/scripts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.18.5",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
+    "babel-loader": "^8.2.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0"
+  },
+  "dependencies": {
+    "asset": "^0.4.13",
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
+    "react-router-dom": "^6.3.0",
+    "style-loader": "^3.3.1"
+  }
+}

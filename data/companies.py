@@ -8,5 +8,5 @@ class Company(SqlAlchemyBase):
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
 
-    company = sqlalchemy.Column(sqlalchemy.String, default="")
+    company = sqlalchemy.Column(sqlalchemy.String, unique=True, default="")
     

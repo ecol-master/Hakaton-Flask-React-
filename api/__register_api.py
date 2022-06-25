@@ -1,20 +1,13 @@
 from flask_restful import Api
-from . import books_resource, authors_resource, genres_resource
+from .news_resource import NewsListResource, NewsFilterListResource, NewToArchiveResource
+
 
 def register_api(app):
     api = Api(app)
 
-    # ресурсы для книг
-    api.add_resource(books_resource.BooksListResource, "/api/v1/books")
-
+    # ресурсы для всех статей
+    api.add_resource(NewsFilterListResource, "/api/v1/news/<string:key_word>/")
     # апи для автора
-    api.add_resource(authors_resource.AuthorsListResource, '/api/v1/authors')
+    api.add_resource(NewsListResource, '/api/v1/news')
 
-    # для жанров
-    api.add_resource(genres_resource.GenresListResource, "/api/v1/genres")
-
-# "title":"Жюль Верн: Вокруг света за 80 дней",
-    # "description":"Вокруг света в восемьдесят дней - увлекательный роман о путешествии вокруг света англичанина Филеаса Фогга и Жана Паспарту, совершенном в результате пари. Для того чтобы выиграть и обогнуть земной шар за 80 дней, им пришлось пережить опасные и невероятные приключения, побывать на разных континентах и во множестве стран. Этот захватывающий приключенческий роман неразрывно связан со своей эпохой. Мир стоит на пороге промышленной революции. Новые географические пути, открытия железной дороги и парового двигателя позволили сократить расстояния между городами и странами. И кажется, будто нужно всего 80 дней, чтобы обогнуть земной шар. По крайней мере, так заманчиво попробовать. Сколько удивительных и непредсказуемых приключений ждет героев!",
-    # "url":"https://www.labirint.ru/books/849628/",
-    # "genre_id":1,
-    # "author_id":1
+    api.add_resource(NewToArchiveResource, "/api/v1/news_archive/<string:url_news>")

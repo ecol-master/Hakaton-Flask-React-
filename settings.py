@@ -19,17 +19,24 @@ def add_info_into_db():
 def add_key_words_into_db(session):
 
     for key_word in KEY_WORDS:
-        key_word_db = KeyWord(
-            word=key_word
-        )
-        session.add(key_word_db)
-        session.commit()
+        
+        try:
+            key_word_db = KeyWord(
+                word=key_word
+            )
+            session.add(key_word_db)
+            session.commit()
+        except Exception:
+            pass
 
 
 def add_companies_into_db(session):
     for company in COMPANIES:
-        company_db = Company(
-            company=company
-        )
-        session.add(company_db)
-        session.commit()
+        try:
+            company_db = Company(
+                company=company
+            )
+            session.add(company_db)
+            session.commit()
+        except Exception:
+            pass

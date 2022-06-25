@@ -13,3 +13,4 @@ class News(SqlAlchemyBase):
     date_publish = sqlalchemy.Column(sqlalchemy.String, default="")
     key_words = sqlalchemy.Column(sqlalchemy.String, default="")
     companies = sqlalchemy.Column(sqlalchemy.String, default="")
+    is_archive = sqlalchemy.Column(sqlalchemy.Boolean, default=False)

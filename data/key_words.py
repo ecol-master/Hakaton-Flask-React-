@@ -7,4 +7,4 @@ class KeyWord(SqlAlchemyBase):
 
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
-    word = sqlalchemy.Column(sqlalchemy.String, default="")
+    word = sqlalchemy.Column(sqlalchemy.String, default="", unique=True)
