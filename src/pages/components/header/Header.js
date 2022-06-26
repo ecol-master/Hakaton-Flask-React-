@@ -1,17 +1,26 @@
 import React, { useState } from "react";
-import {Routes, Route, Link} from 'react-router-dom';
+import { Routes, Route, Link } from "react-router-dom";
 import "./Header.css";
 
 import BurgerMenu from "./BurgerMenu";
-import HomePage from '../../HomePages';
-import News from '../../News';
+import HomePage from "../../HomePages";
+import News from "../../News";
 import Archive from "../../Archive";
 
 const Header = () => {
   const [menuActive, setMenuActive] = useState(false);
 
   function saveXls() {
-    alert('Данные были сохранены на Ваш компьютер в формате .xls');
+    alert("Данные были сохранены на Ваш компьютер в формате .xls");
+    const makeDataUrl = "/api/v1/make_xls/";
+    fetch(makeDataUrl).then((response) => response.json());
+  }
+
+  function updateParser() {
+    alert("Обновление данных может занять несколько минут, просим не нажимать не кнопк по несколько раз.");
+    const makeDataUrl = "/api/v1/update_data/";
+    fetch(makeDataUrl).then((response) => response.json());
+
   }
 
   return (
@@ -49,11 +58,14 @@ const Header = () => {
                 Архив
               </Link>
             </li>
+            <li className="nav__item nav__btn" onClick={updateParser}>
+              Обновить парсер
+            </li>
             <li className="nav__item nav__btn" onClick={saveXls}>
               Выгрузить данные
             </li>
           </ul>
-          <div className="logo-title-mobile">WhyNot?</div> 
+          <div className="logo-title-mobile">WhyNot?</div>
           <div className="burger" onClick={() => setMenuActive(true)}>
             <svg
               className="burger__svg"
@@ -73,16 +85,14 @@ const Header = () => {
             </svg>
           </div>
         </div>
-        
-        <BurgerMenu active={menuActive} setActive={setMenuActive} />
 
-        
+        <BurgerMenu active={menuActive} setActive={setMenuActive} />
       </header>
       <Routes>
-    <Route path='/' element={<HomePage />}/>
-    <Route path='/news' element={<News />}/>
-    <Route path='/archive' element={<Archive />}/>
-    </Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/archive" element={<Archive />} />
+      </Routes>
     </div>
   );
 };

@@ -10,7 +10,7 @@ const Archive = () => {
       useEffect(() => {
         setAppState({ loading: true });
     
-        const newsUrl = '';
+        const newsUrl = '/api/v1/news_archive/';
     
         fetch(newsUrl)
           .then((res) => res.json())
