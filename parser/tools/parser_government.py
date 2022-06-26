@@ -1,4 +1,4 @@
-import requests, asyncio, datetime
+import requests, datetime
 from aiohttp import ClientSession
 from bs4 import BeautifulSoup, Tag
 from data import KeyWord, Company, News, db_session
@@ -134,6 +134,5 @@ def write_info_to_db_news(info: list[dict, ...]):
             )
             session.add(news)
             session.commit()
-            print("создал")
         except Exception:
-            print("Статья повторилась")
+            pass

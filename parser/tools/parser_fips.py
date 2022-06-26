@@ -92,6 +92,5 @@ def write_info_to_db_news(all_info: list[dict, ...]):
             )
             session.add(news)
             session.commit()
-            print("создал 2")
         except Exception:
-            print("запись уже была создана")
+            pass

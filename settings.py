@@ -1,8 +1,6 @@
 from data import KeyWord, Company, db_session
 
 
-PARSER_TIME = 1
-
 KEY_WORDS = ("технологии", "импортозамещение", "инновации", "научные разработки", "патенты", "гранты", "исследования")
 
 COMPANIES = (

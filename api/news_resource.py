@@ -45,7 +45,6 @@ class NewsListResource(Resource):
             } for news in all_news]}
             return jsonify(info)
         except Exception as error:
-            print(error)
             return jsonify(
                 {
                     "news":[]
@@ -78,7 +77,6 @@ class NewsFilterListResource(Resource):
 
 class NewToArchiveResource(Resource):
     def get(self, url_news):
-        print(url_news)
         url_f1 = url_news.replace("***", "/")
         url_f2 = url_f1.replace("-----", "&")
         url_f3 = url_f2.replace("----", "?")
@@ -108,7 +106,6 @@ class ArchiveNewsListResource(Resource):
             } for news in all_news]}
             return jsonify(info)
         except Exception as error:
-            print(error)
             return jsonify(
                 {
                     "news":[]

@@ -4,5 +4,5 @@ from .tools import functions_parser_sites
 
 
 async def run_parser_adaptive():
-    print("hello")
+    pass
     

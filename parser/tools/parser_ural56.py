@@ -91,6 +91,5 @@ def write_all_info_into_db(all_info: list[dict, ...]):
             )
             session.add(news_db)
             session.commit()
-            print("создал 3")
         except Exception:
-            print("запись повторилась")
+            pass

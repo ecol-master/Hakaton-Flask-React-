@@ -1,6 +1,6 @@
 from . import run_parser_adaptive
 from . import run_parser_sites
-import asyncio
+import asyncio, schedule
 
 
 def parsers_main():
