@@ -27,7 +27,7 @@ class NewsListResource(Resource):
                 "text":news.text,
                 "date":news.date_publish,
                 "key_words": get_key_words_by_news(news.key_words)
-            } for news in all_news[:5]]}
+            } for news in all_news]}
             return jsonify(info)
         except Exception as error:
             print(error)
@@ -52,7 +52,7 @@ class NewsFilterListResource(Resource):
                     "text":news.text,
                     "date":news.date_publish,
                     "key_words": get_key_words_by_news(news.key_words)
-                } for news in all_news_filtered[:5]]
+                } for news in all_news_filtered]
                 })
         except Exception:
             return jsonify(
@@ -63,6 +63,7 @@ class NewsFilterListResource(Resource):
 
 class NewToArchiveResource(Resource):
     def get(self, url_news):
+        print(url_news)
         url_f1 = url_news.replace("***", "/")
         url_f2 = url_f1.replace("-----", "&")
         url_f3 = url_f2.replace("----", "?")
@@ -79,7 +80,25 @@ class NewToArchiveResource(Resource):
         except Exception:
             return jsonify({"message":"failed"})
 
-"http://127.0.0.1:5000/api/v1/news_archive/orenburg-gov.ru%-%news%-%6374%-%"
 
+class ArchiveNewsListResource(Resource):
+    def get(self):
+        session = db_session.create_session()
+        all_news = session.query(News).filter(News.is_archive == False).all()
 
-"[https:, orenburg-gov.ru/news/6374/]"
+        try:
+            info = {"news":[{
+                "title": news.title,
+                "url":news.url,
+                "text":news.text,
+                "date":news.date_publish,
+                "key_words": get_key_words_by_news(news.key_words)
+            } for news in all_news[:5]]}
+            return jsonify(info)
+        except Exception as error:
+            print(error)
+            return jsonify(
+                {
+                    "news":[]
+                }
+            )
