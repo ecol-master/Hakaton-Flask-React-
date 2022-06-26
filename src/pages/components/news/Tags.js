@@ -9,6 +9,12 @@ const Tags = ({...props}) => {
     window.location.reload()
   }
 
+  function clickDeleteFilter() {
+    props.setClickTags({name: null});
+    localStorage.clear();
+    window.location.reload();
+  }
+
   return (
     <div className='block-tags tags'>
         <h2 className='tags__title'>Теги</h2>
@@ -17,6 +23,7 @@ const Tags = ({...props}) => {
             props.tags.map((elem, ind) => <li id={ind+1} className='tags__item' onClick={clickTags}>{elem}</li>)
         }  
       </ul>
+      <div className='tags__item btn-clear-filter' onClick={clickDeleteFilter}>Сбросить фильтры</div>
     </div>
   );
 };

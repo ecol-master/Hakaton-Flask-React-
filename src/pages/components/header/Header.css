@@ -42,6 +42,11 @@
     cursor: pointer;
 }
 
+.nav__btn {
+    border: 3px solid #D946EF;
+    padding: 10px;
+}
+
 .nav__item:last-child {
     margin-right: 0;
 }

@@ -32,12 +32,12 @@ const Post = ({postTags, ...props}) => {
               <span className='post__tags'>
                 
                 {
-                    postTags.map((elem) => elem ? <span>#{elem} </span> : <span></span>)
+                    postTags.map((elem) => elem ? <span># {elem} </span> : <span></span>)
                 }
                 </span>
             </p>
             <p className='post__data'>{props.data}</p>
-            <p className='post__nameCompany'>Компании: {props.nameCompany}</p>
+            <p className='post__nameCompany'>Компании: {props.nameCompanies}</p>
             <button className='post__btn' data-url={props.href} onClick={clickTarch} type="submit">В архив</button>
         </div>
         </>

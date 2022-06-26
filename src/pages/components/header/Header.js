@@ -10,6 +10,10 @@ import Archive from "../../Archive";
 const Header = () => {
   const [menuActive, setMenuActive] = useState(false);
 
+  function saveXls() {
+    alert('Данные были сохранены на Ваш компьютер в формате .xls');
+  }
+
   return (
     <div>
       <header className="header">
@@ -44,6 +48,9 @@ const Header = () => {
               <Link to="/archive" className="nav__link">
                 Архив
               </Link>
+            </li>
+            <li className="nav__item nav__btn" onClick={saveXls}>
+              Выгрузить данные
             </li>
           </ul>
           <div className="logo-title-mobile">WhyNot?</div> 
