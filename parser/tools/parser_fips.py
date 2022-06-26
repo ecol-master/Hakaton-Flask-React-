@@ -50,13 +50,14 @@ def get_preview_texts(search_block: Tag):
 
 def get_key_words_and_companies(key_word):
     session = db_session.create_session()
+    id_key_word = session.query(KeyWord).filter(KeyWord.word == key_word).first().id
     key_words = session.query(KeyWord).all()
     result = []
     for i in key_words:
         if i.word == key_word:
             result.append(str(i.id))
 
-    return (' '.join(result) if result != [] else "", "")
+    return (' '.join(result) if result != [] else str(id_key_word), "")
 
 
 
@@ -64,7 +65,7 @@ def build_all_info(titles_page, urls_page, dates_page, texts_page, key_word):
     all_info = list()
     for index, item in enumerate(titles_page):
         url = urls_page[index]
-        k_w, c = get_key_words_and_companies(url)
+        k_w, c = get_key_words_and_companies(key_word)
         all_info.append(
             {
                 "title":titles_page[index],

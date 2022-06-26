@@ -10,21 +10,16 @@ import './App.css'
 
 function App() {
   return (
-    <>
     <div className='App'>
-    <header className='container'>
-    <Header />
-   
-
-
-    </header>
-    <footer>
-        <Footer />
-      </footer>
+      <header className='container'>
+        <Header />
+    
+      </header>
+      <footer>
+          <Footer />
+        </footer>
     </div>
 
-   
-    </>
   );
 }
 

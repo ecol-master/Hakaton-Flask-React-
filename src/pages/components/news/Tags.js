@@ -4,7 +4,9 @@ import "./Tags.css";
 const Tags = ({...props}) => {
 
   function clickTags(e) {
-    props.setClickTags({name: e.target.innerText})
+    props.setClickTags({name: e.target.innerText});
+    localStorage.setItem("key_word", e.target.innerText);
+    window.location.reload()
   }
 
   return (

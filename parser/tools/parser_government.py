@@ -29,7 +29,7 @@ async def run_parser_government(session: ClientSession):
                 all_info = list()
                 try:
                     for news in news_block:
-                        item_info = await get_item_info(news)
+                        item_info = await get_item_info(news, key_word)
                         all_info.append(item_info)
                     now += len(all_info)
                     write_info_to_db_news(all_info)
@@ -46,7 +46,7 @@ def get_pages_count(url: str):
         return 1
 
 
-async def get_item_info(item: Tag) -> dict:
+async def get_item_info(item: Tag, key_word) -> dict:
     title_news = item.find("a", class_="list__item-link")
     title_news_text = title_news.text
     url_news = f"https://orenburg-gov.ru{title_news['href']}"
@@ -54,7 +54,7 @@ async def get_item_info(item: Tag) -> dict:
     preview_text, text = get_item_text(item, url_news)
     
     date_publish_news = get_news_publish_date(item)
-    key_words_in_text = get_key_words_in_text(text)
+    key_words_in_text = get_key_words_in_text(text, key_word)
     companies_in_text = get_companies_in_text(text)
 
     return {
@@ -63,7 +63,7 @@ async def get_item_info(item: Tag) -> dict:
         "text":preview_text,
         "date_publish":date_publish_news,
         "key_words":key_words_in_text,
-        "companies":companies_in_text
+        "companies":companies_in_text,
     }
 
 
@@ -91,18 +91,19 @@ def get_news_publish_date(item: Tag) -> str:
     except Exception:
         return ""
 
-def get_key_words_in_text(news_text: str):
+def get_key_words_in_text(news_text: str, key_word: str):
+    session = db_session.create_session()
+    key_word = session.query(KeyWord).filter(KeyWord.word == key_word).first()    
     try:
-        session = db_session.create_session()
         key_words = session.query(KeyWord).all()
         words_in_text = list()
         for key_word in key_words:
             if key_word.word in news_text:
                 words_in_text.append(str(key_word.id))
         
-        return ' '.join(words_in_text) if words_in_text != [] else ""
+        return ' '.join(words_in_text) if words_in_text != [] else str(key_word.id)
     except Exception:
-        return ""
+        return str(key_word.id)
 
 
 def get_companies_in_text(news_text: str):
