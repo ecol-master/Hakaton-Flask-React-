@@ -1,7 +1,7 @@
 import React from 'react';
 import './Post.css'
 
-const Post = ({postTags, ...props}) => {
+const Post = ({postTags, setClickTag, clickTag, ...props}) => {
     
     function clickTarch(e){
         let url_array = e.target.dataset.url.split("//")
@@ -14,10 +14,7 @@ const Post = ({postTags, ...props}) => {
                 "Accept":"*/*",
                 "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0"
                 }
-        })
-        .then(() =>
-            window.location.reload()
-        )
+        }).then(setClickTag({name: clickTag}))
     }
     
     return (
@@ -30,7 +27,6 @@ const Post = ({postTags, ...props}) => {
               <span>{props.text}</span> 
               
               <span className='post__tags'>
-                
                 {
                     postTags.map((elem) => elem ? <span># {elem} </span> : <span></span>)
                 }

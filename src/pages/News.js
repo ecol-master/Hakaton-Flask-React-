@@ -9,44 +9,44 @@ const News = () => {
     const [clickTags, setClickTags] = useState({name: null})
 
     const [appState, setAppState] = useState({
-        loading: false,
         text: null,
-      });
-    
-      useEffect(() => {
-        setAppState({ loading: true });
-    
-        const newsUrl = localStorage.getItem("key_word") ? `api/v1/news/${localStorage.getItem("key_word").toLowerCase()}` : `api/v1/news/`;
-    
+    });
+    console.log(clickTags)
+    console.log((appState))
+    useEffect(() => {
+        console.log("отрендерился")
+        const newsUrl = clickTags.name ? `api/v1/news/${clickTags.name.toLowerCase()}` : `api/v1/news/`;
+
         fetch(newsUrl)
-          .then((res) => res.json())
-          .then((text) => {
-            setAppState({ loading: true, text: text });
-          });
-      }, [setAppState]);
-    
-    return (     
+            .then((res) => res.json())
+            .then((text) => {
+                setAppState({text: text});
+            })
+    }, [clickTags]);
+
+    return (
         <div>
             <Tags tags={tags} clickTags={clickTags} setClickTags={setClickTags}/>
-          {
-          appState.text ? (
-            appState.text.news.map((news) => {
-              return (
-                <Post href={news.url} postTags={news.key_words} title={news.title} text={news.text} data={news.date} nameCompanies={news.companies}/>
-              );
-            })
-          ) : (
-            <div style={{
-              color: 'aliceblue',
-              fontSize: '2.4rem',
-              marginTop: '50px',
-              textAlign: 'center',
-          }}>
-              По такому ключевому слову статьи не найдены
-          </div>
-          )  
-          }
-      </div>
+            {
+                appState.text ? (
+                    appState.text.news.map((news) => {
+                        return (
+                            <Post href={news.url} postTags={news.key_words} setClickTag={setClickTags} clickTag={clickTags.name} title={news.title}
+                                  text={news.text} data={news.date} nameCompanies={news.companies}/>
+                        );
+                    })
+                ) : (
+                    <div style={{
+                        color: 'aliceblue',
+                        fontSize: '2.4rem',
+                        marginTop: '50px',
+                        textAlign: 'center',
+                    }}>
+                        По такому ключевому слову статьи не найдены
+                    </div>
+                )
+            }
+        </div>
 
     );
 };
